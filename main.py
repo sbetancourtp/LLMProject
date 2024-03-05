@@ -8,11 +8,10 @@ from utils.utils import input_to_bool
 
 def relative_points(student_perform_list: [StudentDailyAssessment]):
     max_relative_score = 50
-    participants_time_list = list(map(
+    participants_time_list = map(
         lambda s_student: s_student.minutes,
         student_perform_list
         )
-    )
     max_time = max(participants_time_list)
 
     for single_student in student_perform_list:
@@ -22,11 +21,14 @@ def relative_points(student_perform_list: [StudentDailyAssessment]):
 
 if __name__ == '__main__':
 
-    group_size = int(input('How many participants are there today: '))
     session_date = date.today() - timedelta(days=1)
-
     student_performance_list = []
-    for i in range(group_size):
+
+    # While statement housekeeping code
+    continue_condition = True
+    i = 0
+
+    while continue_condition:
         print(f"Student {i + 1}")
         name_input = input('What is the student name?: ')
         on_time_input = input_to_bool(input('Was the student on time? (y/n): '))
@@ -46,6 +48,11 @@ if __name__ == '__main__':
             )
         )
         student_performance_list[-1].absolute_points()
+        i += 1
+
+        condition_input = input_to_bool(input("Do you want to continue adding students? (y/n): "))
+        if not condition_input:
+            continue_condition = False
 
     relative_points(student_performance_list)
 

@@ -1,5 +1,5 @@
 
-class StudentDailyAssessment:
+class StudentDailyAssessment(object):
     def __init__(self, name, date, on_time, consistent, partial, minutes, final_score):
         self.name = name
         self.date = date
